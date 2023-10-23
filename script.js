@@ -31,7 +31,13 @@ const gameBoard = (() => {
         return board[index];
     };
 
-    return { setCell, getCell };
+    const reset = () => {
+        for (let i = 0; i < board.length; i++) {
+            board[i] = "";
+        }
+    };
+
+    return { setCell, getCell, reset };
 
 })();
 
@@ -58,7 +64,7 @@ const gameController = (() => {
             return;
         }
         round++;
-        screenController.setMessageElement(`Player ${getCurrentPlayer()}'s turn`);
+        screenController.setMessageElement(`Player ${getCurrentPlayer()}'s turn.`);
     };
 
     const getCurrentPlayer = () => {
@@ -90,7 +96,12 @@ const gameController = (() => {
         return isOver;
     };
 
-    return { playRound, getIsOver }
+    const reset = () => {
+        round = 1;
+        isOver = false;
+    };
+
+    return { playRound, getIsOver, reset }
 })();
 
 /*
@@ -100,6 +111,7 @@ const gameController = (() => {
 const screenController = (() => {
     const cellElements = document.querySelectorAll(".cell");
     const messageElement = document.querySelector(".message");
+    const resetButton = document.querySelector("#reset");
     
     cellElements.forEach((cell) => 
         cell.addEventListener("click", (e) => {
@@ -108,6 +120,13 @@ const screenController = (() => {
             updateGameBoard();
         })
     );
+
+    resetButton.addEventListener("click", (e) => {
+        gameBoard.reset();
+        gameController.reset();
+        updateGameBoard();
+        setMessageElement("Player X's turn.");
+    });
 
     const updateGameBoard = () => {
         for (let i = 0; i < cellElements.length; i++) {

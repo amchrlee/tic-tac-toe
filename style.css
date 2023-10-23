@@ -2,20 +2,39 @@
     box-sizing: border-box;
 }
 
+h1 {
+    text-align: center;
+    line-height: 1.2;
+}
+
+button {
+    /* border: none; */
+    cursor: pointer;
+}
+
+.message {
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 .gameboard {
+    aspect-ratio: 1 / 1;
+    max-width: 28rem;
+    height: auto;
     margin: 0 auto;
-    max-width: 25rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2px;
 }
 
 .cell {
-    width: 100%;
-    height: 0;
-    padding-top: 100%;
+    aspect-ratio: 1 / 1;
     border: 1px solid black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 4rem;
     cursor: pointer;
+}
+
+.reset {
+    text-align: center;
 }
